@@ -115,6 +115,7 @@ def FetchData():
                 }
             )
             url = 'https://chongjiaxuan-employee.s3.amazonaws.com/emp-id-1_image_file'
+            image_url = Image.open(urlopen(url))
 
         except Exception as e:
             program_msg = "Flask could not update DynamoDB table with S3 object URL"
@@ -126,7 +127,7 @@ def FetchData():
     finally:
         cursor.close()
 
-    return render_template("GetEmpOutput.html", id=output["emp_id"], fname=output["first_name"], lname=output["last_name"], interest=output["primary_skills"], location=output["location"], image_url=Image.open(urlopen(url)))
+    return render_template("GetEmpOutput.html", id=output["emp_id"], fname=output["first_name"], lname=output["last_name"], interest=output["primary_skills"], location=output["location"], image_url=image_url)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
