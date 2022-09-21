@@ -126,7 +126,7 @@ def FetchData():
     finally:
         cursor.close()
 
-    return render_template("GetEmpOutput.html", id=output["emp_id"], fname=output["first_name"], lname=output["last_name"], interest=output["primary_skills"], location=output["location"], image_url=image_url)
+    return render_template("GetEmpOutput.html", id=output["emp_id"], fname=output["first_name"], lname=output["last_name"], interest=output["primary_skills"], location=output["location"], image_url=["image_url"])
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
