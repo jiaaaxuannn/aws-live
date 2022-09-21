@@ -114,8 +114,7 @@ def FetchData():
                     }
                 }
             )
-            url = 'https://chongjiaxuan-employee.s3.amazonaws.com/emp-id-1_image_file'
-            image_url = Image.open(urlopen(url))
+            image_url = response['Item']['image_url']['S']
 
         except Exception as e:
             program_msg = "Flask could not update DynamoDB table with S3 object URL"
