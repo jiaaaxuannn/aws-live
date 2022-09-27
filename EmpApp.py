@@ -25,11 +25,9 @@ table = 'employee'
 def home():
     return render_template('index.html')
 
-
-@app.route("/about", methods=['POST'])
-def about():
-    return render_template('www.intellipaat.com')
-
+@app.route("/goToEmployee", methods=['POST'])
+def employee():
+    return render_template('HomeEmp.html')
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
