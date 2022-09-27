@@ -30,7 +30,7 @@ def GoToEmployee():
     return render_template('HomeEmp.html')
 
 @app.route("/gotoaddemployee", methods=['POST'])
-def AddEmployee():
+def GoToAddEmployee():
     return render_template('AddEmp.html')
 
 @app.route("/addemp", methods=['POST'])
