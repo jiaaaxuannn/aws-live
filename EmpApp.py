@@ -190,7 +190,7 @@ def FetchDataToEdit():
     finally:
         cursor.close()
 
-    return render_template("EditEmpProc.html", id=dEmpID, fname=dFirstName, 
+    return render_template("EditEmp.html", id=dEmpID, fname=dFirstName, 
     lname=dLastName, interest=dPriSkill, location=dLocation, image_url=url)
 
 @app.route("/editemp", methods=['POST'])
