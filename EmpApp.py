@@ -142,11 +142,13 @@ def delEmp():
 
     try:
         cursor.execute(select_stmt, {'emp_id': int(emp_id)})
+        row = cursor.fetchone()
+        dFirstName = row[1]
+        dLastName = row[2]
         cursor1.execute(delete_stmt, {'emp_id': int(emp_id)})
         # FETCH ONLY ONE ROWS OUTPUT
-        for result in cursor:
-            print(result)
         db_conn.commit()
+        emp_name = "" + dFirstName + " " + dLastName
     except Exception as e:
         db_conn.rollback()
         return str(e)
@@ -155,7 +157,7 @@ def delEmp():
         cursor.close()
         cursor1.close()
 
-    return render_template('OutRemoveEmployee.html', result=result)
+    return render_template('DeleteEmpOutput.html', name=emp_name)
 
 @app.route("/fetchdataToEdit", methods=['GET', 'POST'])
 def FetchDataToEdit():
