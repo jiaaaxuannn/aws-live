@@ -33,9 +33,9 @@ def gotoemployee():
 def gotoaddemployee():
     return render_template('AddEmp.html')
 
-@app.route("/gotoeditemployee")
-def gotoeditemployee():
-    return render_template('EditEmp.html')
+@app.route("/gotosearchemployee")
+def gotosearchemployee():
+    return render_template('GetEmp.html')
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
