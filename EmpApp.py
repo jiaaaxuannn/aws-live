@@ -23,7 +23,7 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('GetEmp.html')
+    return render_template('HomeEmp.html')
 
 @app.route("/gotoemployee")
 def gotoemployee():
