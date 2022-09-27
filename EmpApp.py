@@ -130,7 +130,7 @@ def FetchData():
     return render_template("GetEmpOutput.html", id=dEmpID, fname=dFirstName, 
     lname=dLastName, interest=dPriSkill, location=dLocation, image_url=url)
 
-@app.route("/delemp/")
+@app.route("/delemp/", methods=['POST'])
 def delEmp():
     # Get Employee
     emp_id = request.form['emp_id']
