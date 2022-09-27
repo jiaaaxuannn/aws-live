@@ -52,7 +52,7 @@ def AddEmp():
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file.png"
         s3 = boto3.resource('s3')
 
         try:
@@ -84,50 +84,157 @@ def AddEmp():
 def GetEmp():
     return render_template("GetEmp.html")
 
+@app.route("/toEditemp", methods=['GET', 'POST'])
+def ToEditEmp():
+    return render_template("EditEmp.html")
 
-@app.route("/fetchdata", methods=['GET','POST'])
+@app.route("/fetchdata", methods=['GET', 'POST'])
 def FetchData():
     emp_id = request.form['emp_id']
-
-    output = {}
-    select_sql = "SELECT emp_id, first_name, last_name, pri_skill, location from employee where emp_id=%s"
+    sqlCmd = "SELECT * FROM employee WHERE emp_id=%s"
     cursor = db_conn.cursor()
 
+    if emp_id == "":
+        return "Please enter an employee ID"
+
     try:
-        cursor.execute(select_sql,(emp_id))
-        result = cursor.fetchone()
+        #Getting Employee Data
+        cursor.execute(sqlCmd, (emp_id))
+        row = cursor.fetchone()
+        dEmpID = row[0]
+        dFirstName = row[1]
+        dLastName = row[2]
+        dPriSkill = row[3]
+        dLocation = row[4]
 
-        output["emp_id"] = result[0]
-        print('EVERYTHING IS FINE TILL HERE')
-        output["first_name"] = result[1]
-        output["last_name"] = result[2]
-        output["primary_skills"] = result[3]
-        output["location"] = result[4]
-        print(output["emp_id"])
-        dynamodb_client = boto3.client('dynamodb', region_name=customregion)
-        try:
-            response = dynamodb_client.get_item(
-                TableName= customtable ,
-                Key={
-                    'empid': {
-                        'N': str(emp_id)
-                    }
-                }
-            )
-            url = 'https://chongjiaxuan-employee.s3.amazonaws.com/emp-id-1_image_file'
-            image_url = Image.open(urlopen(url))
+        key = "emp-id-" + str(emp_id) + "_image_file.png"
 
-        except Exception as e:
-            program_msg = "Flask could not update DynamoDB table with S3 object URL"
-            return render_template('addemperror.html', errmsg1=program_msg, errmsg2=e)
+        # Get Image URL
+        # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        # s3_location = (bucket_location['LocationConstraint'])
+
+        url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
 
     except Exception as e:
-        print(e)
+        return str(e)
+        
+    finally:
+        cursor.close()
+
+    return render_template("GetEmpOutput.html", id=dEmpID, fname=dFirstName, 
+    lname=dLastName, interest=dPriSkill, location=dLocation, image_url=url)
+
+@app.route("/delemp")
+def delEmp():
+    # Get Employee
+    emp_id = request.form['emp_id']
+    # SELECT STATEMENT TO GET DATA FROM MYSQL
+    select_stmt = "SELECT * FROM employee WHERE emp_id = %(emp_id)s"
+    delete_stmt = "DELETE FROM employee WHERE emp_id = %(emp_id)s"
+    cursor = db_conn.cursor()
+    cursor1 = db_conn.cursor()
+
+    try:
+        cursor.execute(select_stmt, {'emp_id': int(emp_id)})
+        cursor1.execute(delete_stmt, {'emp_id': int(emp_id)})
+        # FETCH ONLY ONE ROWS OUTPUT
+        for result in cursor:
+            print(result)
+        db_conn.commit()
+    except Exception as e:
+        db_conn.rollback()
+        return str(e)
+
+    finally:
+        cursor.close()
+        cursor1.close()
+
+    return render_template('OutRemoveEmployee.html', result=result)
+
+@app.route("/fetchdataToEdit", methods=['GET', 'POST'])
+def FetchDataToEdit():
+    emp_id = request.form['emp_id']
+    sqlCmd = "SELECT * FROM employee WHERE emp_id=%s"
+    cursor = db_conn.cursor()
+
+    if emp_id == "":
+        return "Please enter an employee ID"
+
+    try:
+        #Getting Employee Data
+        cursor.execute(sqlCmd, (emp_id))
+        row = cursor.fetchone()
+        dEmpID = row[0]
+        dFirstName = row[1]
+        dLastName = row[2]
+        dPriSkill = row[3]
+        dLocation = row[4]
+
+        key = "emp-id-" + str(emp_id) + "_image_file.png"
+
+        # Get Image URL
+        # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+        # s3_location = (bucket_location['LocationConstraint'])
+
+        url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
+
+    except Exception as e:
+        return str(e)
+        
+    finally:
+        cursor.close()
+
+    return render_template("EditEmpProc.html", id=dEmpID, fname=dFirstName, 
+    lname=dLastName, interest=dPriSkill, location=dLocation, image_url=url)
+
+@app.route("/editemp", methods=['POST'])
+def EditEmp():
+    emp_id = request.form['emp_id']
+    first_name = request.form['first_name']
+    last_name = request.form['last_name']
+    pri_skill = request.form['pri_skill']
+    location = request.form['location']
+    emp_image_file = request.files['emp_image_file']
+
+    edit_sql = "UPDATE employee SET first_name=%s, last_name=%s, pri_skill=%s, location=%s WHERE emp_id=%s"
+    cursor = db_conn.cursor()
+
+    if emp_image_file.filename == "":
+        key = "emp-id-" + str(emp_id) + "_image_file.png"
+        url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
+
+    try:
+        cursor.execute(edit_sql, (first_name, last_name, pri_skill, location, emp_id))
+        db_conn.commit()
+        emp_name = "" + first_name + " " + last_name
+        # Uplaod image file in S3 #
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file.png"
+        s3 = boto3.resource('s3')
+
+        try:
+            print("Data inserted in MySQL RDS... uploading image to S3...")
+            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+            bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
+            s3_location = (bucket_location['LocationConstraint'])
+
+            if s3_location is None:
+                s3_location = ''
+            else:
+                s3_location = '-' + s3_location
+
+            object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
+                s3_location,
+                custombucket,
+                emp_image_file_name_in_s3)
+
+        except Exception as e:
+            return str(e)
 
     finally:
         cursor.close()
 
-    return render_template("GetEmpOutput.html", id=output["emp_id"], fname=output["first_name"], lname=output["last_name"], interest=output["primary_skills"], location=output["location"], image_url=image_url)
+    print("all modification done...")
+    return render_template('EditEmpOutput.html', name=emp_name)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
