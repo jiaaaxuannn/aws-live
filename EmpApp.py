@@ -30,7 +30,7 @@ def about():
     return render_template('www.intellipaat.com')
 
 @app.route("/gotoemployee", methods=['POST'])
-def Employee():
+def employee():
     return render_template('HomeEmp.html')
 
 @app.route("/gotoaddemployee", methods=['POST'])
