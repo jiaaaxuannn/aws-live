@@ -29,7 +29,7 @@ def home():
 def gotoemployee():
     return render_template('HomeEmp.html')
 
-@app.route("/gotoaddemployee", methods=['POST'])
+@app.route("/gotoaddemployee")
 def gotoaddemployee():
     return render_template('AddEmp.html')
 
