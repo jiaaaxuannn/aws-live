@@ -130,7 +130,7 @@ def FetchData():
     return render_template("GetEmpOutput.html", id=dEmpID, fname=dFirstName, 
     lname=dLastName, interest=dPriSkill, location=dLocation, image_url=url)
 
-@app.route("/delemp")
+@app.route("/delemp/")
 def delEmp():
     # Get Employee
     emp_id = request.form['emp_id']
@@ -142,13 +142,11 @@ def delEmp():
 
     try:
         cursor.execute(select_stmt, {'emp_id': int(emp_id)})
-        row = cursor.fetchone()
-        dFirstName = row[1]
-        dLastName = row[2]
         cursor1.execute(delete_stmt, {'emp_id': int(emp_id)})
         # FETCH ONLY ONE ROWS OUTPUT
+        for result in cursor:
+            print(result)
         db_conn.commit()
-        emp_name = "" + dFirstName + " " + dLastName
     except Exception as e:
         db_conn.rollback()
         return str(e)
@@ -157,7 +155,7 @@ def delEmp():
         cursor.close()
         cursor1.close()
 
-    return render_template('DeleteEmpOutput.html', name=emp_name)
+    return render_template('DeleteEmpOutput.html', name=result)
 
 @app.route("/fetchdataToEdit", methods=['GET', 'POST'])
 def FetchDataToEdit():
