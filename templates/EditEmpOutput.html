@@ -94,11 +94,12 @@
             <div id="" class="pad-sec" style="text-align: center;">
                 <div class="container">
                     <div class="form-style-5">
-                        <form action="" autocomplete="on" method="GET">
+                        <form autocomplete="on" method="POST" enctype="multipart/form-data">
+			    <input type="number" name="emp_id" value="{{ id }}" style="position:absolute; top:80px; right:0; visibility:hidden">
                             <h2 style="color: #737272;">UPDATED SUCCESSFULLY</h2><br>
                             <h3 style="color: #737272;">Following Employee has been edited to the latest info in the database</h3><br>
                             <h3 style="color: #737272;">{{ name }}</h3><br>
-                            <input type="submit" value="OK  " />
+                            <input type="submit" value="OK" formaction="/fetchdata" />
                         </form>
                     </div>
                 </div>
