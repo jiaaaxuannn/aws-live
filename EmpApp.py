@@ -209,8 +209,8 @@ def EditEmp():
         db_conn.commit()
         emp_name = "" + first_name + " " + last_name
         
-        except Exception as e:
-            return str(e)
+    except Exception as e:
+        return str(e)
 
     finally:
         cursor.close()
