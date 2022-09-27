@@ -96,7 +96,7 @@
                     <h2>Edit Employee Details</h2>
                     <br>
                     <div class="form-style-5" style="text-align: left">
-                        <form action="/" autocomplete="on" method="POST" enctype="multipart/form-data">
+                        <form autocomplete="on" method="POST" enctype="multipart/form-data">
                             <fieldset>
                                 <b>Employee ID:</b><br> <input type="number" name="emp_id" value="{{ id }}" readonly><br><br>
 
@@ -112,8 +112,8 @@
                                 <b>Image:</b><img src="{{ image_url }}"><br><br>
 
                             </fieldset>
-                            <input type="submit" value="UPDATE EMPLOYEE" />
-                            <a href="HomeEmp.html"><input type="button" value="CANCEL" /></a>
+                            <input type="submit" value="UPDATE EMPLOYEE" formaction="/editemp" />
+                            <input type="submit" value="BACK" formaction="/fetchdata" />
                         </form>
                     </div>
                 </div>
