@@ -96,7 +96,7 @@
                     <h2>View Employee Details</h2>
                     <br>
                     <div class="form-style-5" style="text-align: left">
-                        <form action="/delemp" autocomplete="on" method="POST" enctype="multipart/form-data">
+                        <form autocomplete="on" method="POST" enctype="multipart/form-data">
                             <fieldset>
                                 <b>Employee ID: </b>{{ id }}<br><br>
 				<input type="number" name="emp_id" value="{{ id }}" style="position:absolute; top:80px; right:0; visibility:hidden">
@@ -107,7 +107,7 @@
                                 <b>Image: </b><img src="{{ image_url }}"><br><br>
                             </fieldset>
                             <!-- <input type="submit" value="EDIT" formaction="/fetchdataToEdit" /> -->
-                            <input type="submit" value="DELETE" />
+                            <input type="submit" value="DELETE" formaction="/delemp"  />
                         </form>
                     </div>
                 </div>
