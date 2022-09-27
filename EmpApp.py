@@ -29,6 +29,10 @@ def home():
 def employee():
     return render_template('HomeEmp.html')
 
+@app.route("/goToAddEmployee", methods=['POST'])
+def AddEmployee():
+    return render_template('AddEmp.html')
+
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
