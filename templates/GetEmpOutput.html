@@ -98,12 +98,12 @@
                     <div class="form-style-5" style="text-align: left">
                         <form>
                             <fieldset>
-                                <b>Employee ID: </b>{{ emp_id }}<br><br>
-                                <b>First Name: </b>{{ first_name }}<br><br>
-                                <b>Last Name: </b>{{ last_name }}<br><br>
-                                <b>Primary Skills: </b>{{ pri_skill }}<br><br>
+                                <b>Employee ID: </b>{{ id }}<br><br>
+                                <b>First Name: </b>{{ fname }}<br><br>
+                                <b>Last Name: </b>{{ lname }}<br><br>
+                                <b>Primary Skills: </b>{{ interest }}<br><br>
                                 <b>Location: </b>{{ location }}<br><br>
-                                <b>Image: </b><img src="{{ emp_image_file }}"><br><br>
+                                <b>Image: </b><img src="{{ image_url }}"><br><br>
                             </fieldset>
                             <!-- <input type="submit" value="EDIT" formaction="/fetchdataToEdit" /> -->
                             <input type="button" value="DELETE" formaction="/delemp" />
@@ -112,7 +112,7 @@
                 </div>
             </div>
         </section>
-
+	    
         <!-- Footer
         ================================================== -->
         <footer>
