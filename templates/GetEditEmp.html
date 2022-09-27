@@ -93,12 +93,14 @@
         <section>
             <div id="" class="pad-sec" style="text-align: center;">
                 <div class="container">
-                    <div class="form-style-5">
-                        <form action="" autocomplete="on" method="GET">
-                            <h2 style="color: #737272;">SAVED SUCCESSFUL</h2><br>
-                            <h3 style="color: #737272;">Following Employee has been added to the database</h3><br>
-                            <h3 style="color: #737272;">{{ name }}</h3><br>
-                            <input type="submit" value="BACK" />
+                    <h2>Search Employee</h2>
+                    <br>
+                    <div class="form-style-5" style="text-align: left">
+                        <form action="/fetchdataToEdit" autocomplete="on" method="POST" enctype="multipart/form-data">
+                            <fieldset>
+                                <b>Employee ID:</b><br> <input type="number" name="emp_id" placeholder="Employee ID *"><br><br>
+                            </fieldset>
+                            <input type="submit" value="SEARCH" /> 
                         </form>
                     </div>
                 </div>
