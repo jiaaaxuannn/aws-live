@@ -216,7 +216,7 @@ def EditEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('EditEmpOutput.html', name=emp_name)
+    return render_template('EditEmpOutput.html', name=emp_name, emp_id=emp_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
