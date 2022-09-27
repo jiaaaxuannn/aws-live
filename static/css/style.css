@@ -418,10 +418,13 @@ p {
   transition: color .3s ease-in-out;
 }
 
+.navbar-default .navbar-nav > li > a:hover {
+  color: #fc6e51;
+}
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > 
 .active > a:focus {
   background: transparent;
-  color: #fc6e51;
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
