@@ -45,7 +45,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <![endif]-->
 
 </head>
 
@@ -93,19 +93,20 @@
                     <div class="form-style-5" style="text-align: left">
                         <form autocomplete="on" method="POST" enctype="multipart/form-data">
                             <fieldset>
-                                <b>Employee ID:</b><br> <input type="number" name="emp_id" value="{{ id }}" readonly><br><br>
+                                <b>Employee ID:</b><br> <input type="number" name="emp_id" value="{{ id }}"
+                                    readonly><br><br>
 
                                 <b>First Name:</b><br> <input type="text" name="first_name" value="{{ fname }}"><br><br>
 
                                 <b>Last Name:</b><br> <input type="text" name="last_name" value="{{ lname }}"><br><br>
 
                                 <b>Primary Skills:</b><br> <input type="text" name="pri_skill"
-                                value="{{ interest }}"><br><br>
+                                    value="{{ interest }}"><br><br>
 
                                 <b>Location:</b><br> <input type="text" name="location" value="{{ location }}"><br><br>
 
                                 <b>Image:</b><img src="{{ image_url }}"><br><br>
-				<input type=file name="emp_image_file"><br><br>
+                                <input type=file name="emp_image_file"><br><br>
 
                             </fieldset>
                             <input type="submit" value="UPDATE EMPLOYEE" formaction="/editemp" />
@@ -119,25 +120,25 @@
         <!-- Footer
         ================================================== -->
         <footer>
-		<div id="footer-section" class="text-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<ul class="footer-social-links">
-							<li><a href="#">Facebook</a></li>
-							<li><a href="#">Twitter</a></li>
-							<li><a href="#">Dribbble</a></li>
-							<li><a href="#">Behance</a></li>
-							<li><a href="#">Pinterest</a></li>
-						</ul>
-						<p class="copyright">
-							&copy; 2022 Siesta - Created By JiaXuan JingShi WaiZhong
-						</p>
-					</div> <!-- End col-sm-8 -->
-				</div> <!-- End row -->
-			</div> <!-- End container -->
-		</div> <!-- End footer-section  -->
-	</footer>
+            <div id="footer-section" class="text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <ul class="footer-social-links">
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Dribbble</a></li>
+                                <li><a href="#">Behance</a></li>
+                                <li><a href="#">Pinterest</a></li>
+                            </ul>
+                            <p class="copyright">
+                                &copy; 2022 Siesta - Created By JiaXuan JingShi WaiZhong
+                            </p>
+                        </div> <!-- End col-sm-8 -->
+                    </div> <!-- End row -->
+                </div> <!-- End container -->
+            </div> <!-- End footer-section  -->
+        </footer>
         <!-- End footer -->
 
     </div>
