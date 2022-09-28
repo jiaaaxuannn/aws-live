@@ -45,7 +45,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <![endif]-->
 
 </head>
 
@@ -90,9 +90,11 @@
                 <div class="container">
                     <div class="form-style-5">
                         <form autocomplete="on" method="POST" enctype="multipart/form-data">
-			    <input type="number" name="emp_id" value="{{ id }}" style="position:absolute; top:80px; right:0; visibility:hidden">
+                            <input type="number" name="emp_id" value="{{ id }}"
+                                style="position:absolute; top:80px; right:0; visibility:hidden">
                             <h2 style="color: #737272;">UPDATED SUCCESSFULLY</h2><br>
-                            <h3 style="color: #737272;">Following Employee has been edited to the latest info in the database</h3><br>
+                            <h3 style="color: #737272;">Following Employee has been edited to the latest info in the
+                                database</h3><br>
                             <h3 style="color: #737272;">{{ name }}</h3><br>
                             <input type="submit" value="OK" formaction="/fetchdata" />
                         </form>
@@ -104,25 +106,25 @@
         <!-- Footer
         ================================================== -->
         <footer>
-		<div id="footer-section" class="text-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<ul class="footer-social-links">
-							<li><a href="#">Facebook</a></li>
-							<li><a href="#">Twitter</a></li>
-							<li><a href="#">Dribbble</a></li>
-							<li><a href="#">Behance</a></li>
-							<li><a href="#">Pinterest</a></li>
-						</ul>
-						<p class="copyright">
-							&copy; 2022 Siesta - Created By JiaXuan JingShi WaiZhong
-						</p>
-					</div> <!-- End col-sm-8 -->
-				</div> <!-- End row -->
-			</div> <!-- End container -->
-		</div> <!-- End footer-section  -->
-	</footer>
+            <div id="footer-section" class="text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <ul class="footer-social-links">
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Dribbble</a></li>
+                                <li><a href="#">Behance</a></li>
+                                <li><a href="#">Pinterest</a></li>
+                            </ul>
+                            <p class="copyright">
+                                &copy; 2022 Siesta - Created By JiaXuan JingShi WaiZhong
+                            </p>
+                        </div> <!-- End col-sm-8 -->
+                    </div> <!-- End row -->
+                </div> <!-- End container -->
+            </div> <!-- End footer-section  -->
+        </footer>
         <!-- End footer -->
 
     </div>
