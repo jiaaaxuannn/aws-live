@@ -193,7 +193,11 @@ def FetchDataToEdit():
         # bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
         # s3_location = (bucket_location['LocationConstraint'])
 
-        url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
+        s3_client = boto3.client('s3')
+        for item in s3_client.list_objects(Bucket=custombucket)['Contents']:
+            if(item['Key'] == key):
+                url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']})
+        #url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
 
     except Exception as e:
         return str(e)
