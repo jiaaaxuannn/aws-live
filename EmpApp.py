@@ -213,7 +213,10 @@ def EditEmp():
     
     if emp_image_file.filename == "":
         key = "emp-id-" + str(emp_id) + "_image_file.png"
-        url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
+        for item in s3_client.list_objects(Bucket=custombucket)['Contents']:
+            if(item['Key'] == key):
+                url = s3_client.generate_presigned_url('get_object', Params = {'Bucket': bucket, 'Key': item['Key']})
+        #url = "https://%s.s3.amazonaws.com/%s" % (custombucket, key)
 
     try:
         cursor.execute(edit_sql, (first_name, last_name, pri_skill, location, emp_id))
